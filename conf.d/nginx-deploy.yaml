@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+  name: nginx
+  namespace:
+spec:
+  minReadySeconds: 10
+  progressDeadlineSeconds: 300
+  revisionHistoryLimit: 3
+  replicas: 6
+  selector:
+    matchLabels:
+      run: nginx
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx:1.12
+        name: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+          periodSeconds: 5
+          successThreshold: 3
+          failureThreshold: 1
+      restartPolicy: Always
