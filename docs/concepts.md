@@ -5,13 +5,11 @@
 - [Deployments](#Deployments)
 - [Services](#Services)
 - [Volumes](#Volumes)
-- [Config Maps](#)
-- [Secrets](#)
-- [Daemons](#)
-- [Jobs](#)
-- [Cron Jobs](#)
-- [Namespaces](#)
-- [Quotas and Limits](#)
+- [Config Maps](#ConfigMaps)
+- [Secrets](#Secrets)
+- [Daemons](#Daemons)
+- [Jobs](#Jobs)
+- [Namespaces](#Namespaces)
 
 <a name="Pods"></a> 
 ### Pods
@@ -171,4 +169,45 @@ Data inside the host directory are safe to container crashes and restarts as wel
 However, if the pod is moved from a node to another one, data on the initial node are no more accessible from the new instance of the pod.
 
 
+<a name="ConfigMaps"></a> 
+### Config Maps
 
+Kubernetes allows separating configuration options into a separate object called ConfigMap
+
+- Mount Config Map as volume: config Map is mounted as a volume into the pod
+- Pass Config Map by environment variables
+
+<a name="Secrets"></a> 
+### Secrets
+
+Secrets are kept safe by distributing sensitive information (such as credentials, tokens and private encryption keys) only to the nodes that run the pods that need access to the secrets.
+
+On the nodes, secrets are always stored in memory and never written to the disk.
+
+On the master node, secrets are stored in encrypted form into the etcd database.
+
+<a name="Daemons"></a> 
+### Daemons
+
+A Daemon Set is a controller type ensuring each node in the cluster runs a pod.
+
+New node is added to the cluster, a new pod is added to the node. 
+
+The node is removed from the cluster, the pod running on it is removed and not scheduled on another node. 
+
+Deleting a Daemon Set will clean up all the pods it created.
+
+<a name="Jobs"></a> 
+### Jobs
+
+ Job is an abstraction for create batch processes. A job creates one or more pods and ensures that a given number of them successfully complete.
+
+<a name="Namespaces"></a> 
+### Namespaces
+
+Kubernetes supports multiple virtual clusters backed by the same physical cluster. These virtual clusters are called namespaces. 
+
+Two initial namespaces:
+
+- default: the default namespace for objects with no other namespace
+- kube-system the namespace for objects created by the kubernetes system
