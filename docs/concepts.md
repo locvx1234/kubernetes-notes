@@ -197,6 +197,12 @@ The node is removed from the cluster, the pod running on it is removed and not s
 
 Deleting a Daemon Set will clean up all the pods it created.
 
+Some typical uses of Daemon Set:
+
+- running a cluster storage daemon, such as `glusterd`, `ceph`, on each node.
+- running a logs collection daemon on every node, such as `fluentd` or `logstash`.
+- running a node monitoring daemon on every node, such as Prometheus Node Exporter, `collectd`, Dynatrace OneAgent, Datadog agent, New Relic agent, Ganglia gmond or Instana agent.
+
 <a name="Jobs"></a> 
 ### Jobs
 
