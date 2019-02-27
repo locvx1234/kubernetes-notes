@@ -298,3 +298,11 @@ kubeadm join cluster.kube.com:16443 --token 87zr96.5gzzy3we8175ecmt --discovery-
 ```bash
 kubeadm token create --print-join-command 
 ```
+
+
+## References 
+
+https://blog.csdn.net/chenleiking/article/details/84841394
+
+https://github.com/meditechopen/meditech-thuctap/tree/master/ThaoNV/HAProxy%20%2B%20KeepAlive
+
