@@ -67,8 +67,8 @@ Edit file `/etc/keepalived/keepalived.conf` by following [keepalived.conf](../co
 
 #### Restart service 
 ```bash
-[root@ha1 ~]# systemctl restart keepalived
-[root@ha1 ~]# systemctl enable keepalived
+systemctl restart keepalived
+systemctl enable keepalived
 ```
 
 ### 2. HAproxy
@@ -102,6 +102,13 @@ Edit file `/etc/haproxy/haproxy.cfg` by following [haproxy.cfg](../conf.d/haprox
 systemctl restart haproxy
 systemctl enable haproxy
 ```
+
+Ensure that , port `16443` listening on all `HA` node:
+
+```bash
+netstat -an | grep 16443
+```
+
 
 ### 3. Docker 
 <a name="docker"></a>
@@ -212,10 +219,11 @@ EOF
 ### 5. Initializing your master  
 <a name="init"></a>
 
-#### Crete config file 
+Execute commands on `MASTER1`
+#### Create config file 
 
 ```bash 
-cat << EOF >> kube_config.yml 
+cat << EOF >> kube-config.yml 
 apiVersion: kubeadm.k8s.io/v1beta1
 kind: ClusterConfiguration
 kubernetesVersion: v1.13.1
@@ -249,7 +257,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 
 ```bash
-wget https://raw.githubusercontent.com/locvx1234/kubernetes-notes/master/conf.d/kube-flannel.yaml
+curl -O https://raw.githubusercontent.com/locvx1234/kubernetes-notes/master/conf.d/kube-flannel.yml
 kubectl create -f kube-flannel.yml
 ```
 
