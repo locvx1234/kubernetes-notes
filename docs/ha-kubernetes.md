@@ -87,6 +87,21 @@ net.ipv4.ip_forward = 1
 net.ipv4.ip_nonlocal_bind = 1
 ```
 
+
+#### Disable SElinux 
+
+```bash 
+setenforce 0
+sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+```
+
+#### Disable firewalld 
+
+```bash
+systemctl stop firewalld
+systemctl disable firewalld
+```
+
 #### Install haproxy 
 
 ```bash
@@ -120,7 +135,7 @@ yum install yum-utils device-mapper-persistent-data lvm2 -y
 yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
-yum update && yum install docker-ce-18.06.2.ce -y
+yum update -y && yum install docker-ce-18.06.2.ce -y
 
 systemctl restart docker
 systemctl enable docker
