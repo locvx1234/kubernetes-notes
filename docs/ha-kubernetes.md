@@ -171,7 +171,8 @@ sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 #### Install tool 
 
 ```bash
-yum install -y kubelet-1.13.1-0 kubeadm-1.13.1-0 kubectl-1.13.1-0 --disableexcludes=kubernetes
+yum update -y
+yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 systemctl enable --now kubelet
 ```
 
